@@ -41,7 +41,7 @@ function App() {
      <Routes>
       {/* <Route path='/' element={<Navbar title="TextUtils" mode={mode} toggleMode={toggleMode}/> } />  */}
       <Route exat path='/' element={<TextForm showAlert={showAlert} heading="Enter text here to analysis" mode={mode}/>} /> 
-      <Route exat path='/about' element={<About/>} /> 
+      <Route exat path='/about' element={<About mode={mode}/>} /> 
 
       </Routes>
 
