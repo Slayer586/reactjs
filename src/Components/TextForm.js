@@ -24,19 +24,26 @@ export default function TextForm(props) {
         setText(event.target.value) 
     }
 
-    // Credits: A
     const handleCopy = () => {
         navigator.clipboard.writeText(text); 
         props.showAlert("Copied to Clipboard!", "success");
     }
 
-    // Credits: Coding Wala
+
     const handleExtraSpaces = () => {
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "));
         props.showAlert("Extra spaces removed!", "success");
     }
 
+    
+    const msg = new SpeechSynthesisUtterance()
+    const handleTextToSpeech =(msg)=>{
+     msg.text=text
+     window.speechSynthesis.speak(msg)
+     props.showAlert("Text to speech sucessful","success")
+    }
+ 
     const [text, setText] = useState(''); 
     // text = "new text"; // Wrong way to change the state
     // setText("new text"); // Correct way to change the state
@@ -52,6 +59,8 @@ export default function TextForm(props) {
             <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear Text</button>
             <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Copy Text</button>
             <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+            <button disabled={text.length===0} className="btn btn-primary mx-1 my-2" onClick={()=>handleTextToSpeech(msg)}> Text To Speech</button>
+
         </div>
         <div className="container my-3" style={{color: props.mode==='dark'?'white':'#042743'}}>
             <h2>Your text summary</h2>
